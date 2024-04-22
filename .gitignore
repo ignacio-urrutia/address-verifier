@@ -1,0 +1,6 @@
+venv/
+.env
+img/
+*ipynb
+uploads/
+__pycache__/

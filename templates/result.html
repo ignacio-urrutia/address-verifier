@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Image Analysis Result</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <style>
+        body { 
+            padding-top: 50px; 
+            background-color: #f7f7f7; 
+        }
+        .container {
+            background: white; 
+            padding: 20px; 
+            border-radius: 8px; 
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+        h1 {
+            color: #333; 
+            font-size: 24px; 
+            margin-bottom: 20px;
+        }
+        .form-group label {
+            font-weight: bold;
+            color: #555;
+        }
+        .form-control {
+            background-color: #e9ecef;
+            color: #333;
+            border: none;
+        }
+        .form-group div {
+            margin-top: 5px;
+        }
+        .form-group div label {
+            margin-right: 15px;
+            font-weight: normal;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Analysis Result for {{ filename }}</h1>
+        <form>
+            {% for key, value in result.items() %}
+                <div class="form-group">
+                    <label for="{{ key }}">{{ key.replace('_', ' ').title() }}</label>
+                    {% if key == 'confidence_levels' %}
+                        <div>
+                            {% for subkey, subvalue in value.items() %}
+                                <label>{{ subkey.replace('_', ' ').title() }}: {{ subvalue }}%</label>
+                            {% endfor %}
+                        </div>
+                    {% else %}
+                        <input type="text" class="form-control" id="{{ key }}" value="{{ value }}" readonly>
+                    {% endif %}
+                </div>
+            {% endfor %}
+        </form>
+    </div>
+</body>
+</html>
